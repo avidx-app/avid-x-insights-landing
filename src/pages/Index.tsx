@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Search, BarChart3, Users, Target, Zap, Eye, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   return (
@@ -14,11 +15,15 @@ const Index = () => {
             <BarChart3 className="w-8 h-8" />
             <span className="text-xl font-bold">AvidX</span>
           </div>
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-6 items-center">
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
             <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
             <a href="#use-cases" className="text-muted-foreground hover:text-foreground transition-colors">Use Cases</a>
+            <ThemeToggle />
           </nav>
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -26,7 +31,7 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Unlock Competitor Insights in{" "}
+            Unlock Competitor Intelligent in{" "}
             <span className="text-primary">Minutes</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">

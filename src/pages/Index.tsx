@@ -2,158 +2,131 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Search, BarChart3, Users, Target, Zap, Eye, TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-gray-100">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-bold text-gray-900">
-              AvidX
-            </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                Features
-              </a>
-              <a href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                How it Works
-              </a>
-              <a href="#use-cases" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                Use Cases
-              </a>
-            </nav>
+      <header className="border-b border-border">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <BarChart3 className="w-8 h-8" />
+            <span className="text-xl font-bold">AvidX</span>
           </div>
+          <nav className="hidden md:flex space-x-6">
+            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+            <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
+            <a href="#use-cases" className="text-muted-foreground hover:text-foreground transition-colors">Use Cases</a>
+          </nav>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 md:py-32">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Don't Just Guess About<br />
-            <span className="text-gray-700">Your Competition</span>
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center max-w-4xl">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Unlock Competitor Insights in{" "}
+            <span className="text-primary">Minutes</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Get instant competitor insights from up to 5 websites. Analyze their strategies, 
-            compare key metrics, and discover opportunities to outperform them.
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+            Analyze up to 5 competitor websites instantly. Get detailed insights on features, pricing, content strategies, and more to stay ahead of the competition.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-lg font-medium transition-all duration-200"
-              onClick={() => window.location.href = '/analyze'}
-            >
-              Start Analysis
-              <ArrowRight className="ml-2 h-5 w-5" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/analyze">
+              <Button size="lg" className="text-lg px-8 py-3 h-auto">
+                Try Now - It's Free
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <Button variant="outline" size="lg" className="text-lg px-8 py-3 h-auto">
+              See How It Works
             </Button>
-            <p className="text-sm text-gray-500">Free • No signup required</p>
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Your competitive intelligence<br />companion
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get instant insights from competitor websites you want to analyze
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+      <section id="how-it-works" className="py-20 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Input URLs</h3>
-              <p className="text-gray-600">
-                Enter up to 5 competitor websites you want to analyze and compare
+              <h3 className="text-xl font-semibold mb-3">1. Enter URLs</h3>
+              <p className="text-muted-foreground">
+                Simply paste up to 5 competitor website URLs you want to analyze
               </p>
             </div>
-
             <div className="text-center">
-              <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                <BarChart3 className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Eye className="w-8 h-8 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">AI Analysis</h3>
-              <p className="text-gray-600">
-                Our AI scans and analyzes key metrics, content strategies, and performance data
+              <h3 className="text-xl font-semibold mb-3">2. AI Analysis</h3>
+              <p className="text-muted-foreground">
+                Our AI scans and analyzes each site for key business intelligence
               </p>
             </div>
-
             <div className="text-center">
-              <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                <Eye className="h-8 w-8 text-white" />
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Get Insights</h3>
-              <p className="text-gray-600">
-                Receive detailed competitive insights and actionable recommendations
+              <h3 className="text-xl font-semibold mb-3">3. Get Insights</h3>
+              <p className="text-muted-foreground">
+                Receive detailed reports on pricing, features, and strategies
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Everything you need to<br />stay ahead
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
-              <Target className="h-12 w-12 text-gray-900 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">SEO Analysis</h3>
-              <p className="text-gray-600">
-                Compare keyword strategies, meta tags, and search optimization techniques
+      {/* Key Features */}
+      <section id="features" className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold text-center mb-12">What You'll Discover</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="p-6 border-2 hover:border-primary/20 transition-colors">
+              <Target className="w-10 h-10 mb-4 text-primary" />
+              <h3 className="text-lg font-semibold mb-2">Product Features</h3>
+              <p className="text-muted-foreground text-sm">
+                Comprehensive analysis of competitor features and capabilities
               </p>
             </Card>
-
-            <Card className="p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
-              <TrendingUp className="h-12 w-12 text-gray-900 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Performance Metrics</h3>
-              <p className="text-gray-600">
-                Analyze loading speeds, mobile optimization, and technical performance
+            <Card className="p-6 border-2 hover:border-primary/20 transition-colors">
+              <BarChart3 className="w-10 h-10 mb-4 text-primary" />
+              <h3 className="text-lg font-semibold mb-2">Pricing Models</h3>
+              <p className="text-muted-foreground text-sm">
+                Detailed breakdown of pricing strategies and plans
               </p>
             </Card>
-
-            <Card className="p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
-              <Users className="h-12 w-12 text-gray-900 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Content Strategy</h3>
-              <p className="text-gray-600">
-                Discover content gaps, messaging approaches, and engagement tactics
+            <Card className="p-6 border-2 hover:border-primary/20 transition-colors">
+              <Zap className="w-10 h-10 mb-4 text-primary" />
+              <h3 className="text-lg font-semibold mb-2">USPs & Positioning</h3>
+              <p className="text-muted-foreground text-sm">
+                Unique selling propositions and market positioning analysis
               </p>
             </Card>
-
-            <Card className="p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
-              <Zap className="h-12 w-12 text-gray-900 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Technology Stack</h3>
-              <p className="text-gray-600">
-                Identify tools, frameworks, and technologies your competitors use
+            <Card className="p-6 border-2 hover:border-primary/20 transition-colors">
+              <Search className="w-10 h-10 mb-4 text-primary" />
+              <h3 className="text-lg font-semibold mb-2">SEO Insights</h3>
+              <p className="text-muted-foreground text-sm">
+                Keywords, meta tags, and search optimization strategies
               </p>
             </Card>
-
-            <Card className="p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
-              <BarChart3 className="h-12 w-12 text-gray-900 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Side-by-Side Comparison</h3>
-              <p className="text-gray-600">
-                Visual comparisons that highlight strengths, weaknesses, and opportunities
+            <Card className="p-6 border-2 hover:border-primary/20 transition-colors">
+              <Eye className="w-10 h-10 mb-4 text-primary" />
+              <h3 className="text-lg font-semibold mb-2">Tech Stack</h3>
+              <p className="text-muted-foreground text-sm">
+                Technology choices and infrastructure insights
               </p>
             </Card>
-
-            <Card className="p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
-              <Eye className="h-12 w-12 text-gray-900 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Actionable Insights</h3>
-              <p className="text-gray-600">
-                Clear recommendations on how to improve and outperform competitors
+            <Card className="p-6 border-2 hover:border-primary/20 transition-colors">
+              <Users className="w-10 h-10 mb-4 text-primary" />
+              <h3 className="text-lg font-semibold mb-2">Trust Signals</h3>
+              <p className="text-muted-foreground text-sm">
+                Social proof, certifications, and credibility indicators
               </p>
             </Card>
           </div>
@@ -161,55 +134,32 @@ const Index = () => {
       </section>
 
       {/* Use Cases */}
-      <section id="use-cases" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Perfect for every business
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Whether you're a startup, agency, or enterprise, competitive intelligence is crucial for growth
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-6">
-              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Target className="h-6 w-6 text-gray-700" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Startups</h3>
-              <p className="text-sm text-gray-600">
-                Research market leaders and identify differentiation opportunities
+      <section id="use-cases" className="py-20 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl font-bold text-center mb-12">Perfect For</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Startup Founders</h3>
+              <p className="text-muted-foreground">
+                Understand your market, validate pricing, and identify gaps in competitor offerings before launching your product.
               </p>
             </div>
-
-            <div className="text-center p-6">
-              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="h-6 w-6 text-gray-700" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Marketing Agencies</h3>
-              <p className="text-sm text-gray-600">
-                Deliver comprehensive competitive analysis reports to clients
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Product Managers</h3>
+              <p className="text-muted-foreground">
+                Stay ahead of feature developments and positioning changes in your competitive landscape.
               </p>
             </div>
-
-            <div className="text-center p-6">
-              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="h-6 w-6 text-gray-700" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">E-commerce</h3>
-              <p className="text-sm text-gray-600">
-                Monitor competitor pricing, product strategies, and positioning
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Marketing Teams</h3>
+              <p className="text-muted-foreground">
+                Discover content strategies, SEO tactics, and messaging approaches that work in your industry.
               </p>
             </div>
-
-            <div className="text-center p-6">
-              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <BarChart3 className="h-6 w-6 text-gray-700" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Product Teams</h3>
-              <p className="text-sm text-gray-600">
-                Analyze feature sets, user experience, and market positioning
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold">Business Analysts</h3>
+              <p className="text-muted-foreground">
+                Generate comprehensive competitive intelligence reports quickly and efficiently.
               </p>
             </div>
           </div>
@@ -217,41 +167,28 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Start Your Analysis
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
-            Compare up to 5 competitors in minutes. No signup required.
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center max-w-2xl">
+          <h2 className="text-3xl font-bold mb-6">Ready to Analyze Your Competition?</h2>
+          <p className="text-xl text-muted-foreground mb-8">
+            Get started now - no signup required, completely free to use.
           </p>
-          <Button 
-            size="lg" 
-            className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-lg font-medium transition-all duration-200"
-            onClick={() => window.location.href = '/analyze'}
-          >
-            Start Analysis
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link to="/analyze">
+            <Button size="lg" className="text-lg px-8 py-3 h-auto">
+              Start Your Analysis
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-12">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-xl font-bold text-gray-900 mb-4 md:mb-0">
-              AvidX
-            </div>
-            <div className="flex space-x-6 text-sm text-gray-600">
-              <a href="#" className="hover:text-gray-900 transition-colors duration-200">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-gray-900 transition-colors duration-200">
-                Terms of Service
-              </a>
-              <span>© 2024 AvidX. All rights reserved.</span>
-            </div>
+      <footer className="border-t border-border py-8 px-4">
+        <div className="container mx-auto text-center text-muted-foreground">
+          <p>&copy; 2024 AvidX. All rights reserved.</p>
+          <div className="flex justify-center space-x-6 mt-4">
+            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
           </div>
         </div>
       </footer>

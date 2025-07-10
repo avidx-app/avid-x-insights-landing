@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Card, from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { ArrowRight, Search, BarChart3, Users, Target, Zap, Eye, TrendingUp } from "lucide-react";
 
 const Index = () => {

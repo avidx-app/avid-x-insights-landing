@@ -103,3 +103,50 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .prose {
+    @apply text-foreground;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-foreground;
+  }
+
+  .prose a {
+    @apply text-primary;
+  }
+
+  .prose blockquote {
+    @apply border-l-primary;
+  }
+
+  .prose code {
+    @apply text-primary;
+  }
+
+  .prose table {
+    @apply w-full my-6;
+  }
+
+  .prose thead {
+    @apply border-b;
+  }
+
+  .prose tr {
+    @apply border-b;
+  }
+
+  .prose th {
+    @apply px-4 py-3 text-left font-medium;
+  }
+
+  .prose td {
+    @apply px-4 py-3;
+  }
+}

@@ -16,6 +16,7 @@ const Index = () => {
             <span className="text-xl font-bold">AvidX</span>
           </div>
           <nav className="hidden md:flex space-x-6 items-center">
+            <Link to="/analyze" className="text-muted-foreground hover:text-foreground transition-colors">Analyze</Link>
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
             <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
             <a href="#use-cases" className="text-muted-foreground hover:text-foreground transition-colors">Use Cases</a>
@@ -31,7 +32,7 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Unlock Competitor Intelligent in{" "}
+            Unlock Competitor Intelligence in{" "}
             <span className="text-primary">Minutes</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">

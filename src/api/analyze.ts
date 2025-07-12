@@ -2,77 +2,81 @@
 // Placeholder for future API integration
 // This will handle the backend logic for competitor analysis
 
-import { NextApiRequest, NextApiResponse } from 'next';
+const FIRECRAWL_API_KEY = process.env.FIRECRAWL_API_KEY;
 
 interface AnalysisRequest {
   urls: string[];
 }
 
-interface AnalysisResponse {
+interface FirecrawlResult {
+  url: string;
   success: boolean;
   data?: {
-    productFeatures: string;
-    pricingModels: string;
-    uniqueSellingProps: string;
-    contentStrategies: string;
-    seoInsights: string;
-    techStack: string;
-    trustSignals: string;
+    markdown: string;
+    html: string;
+    metadata: Record<string, any>;
   };
   error?: string;
 }
 
-// Placeholder for Firecrawl integration
-class FirecrawlService {
-  private apiKey: string;
-
-  constructor(apiKey: string) {
-    this.apiKey = apiKey;
-  }
-
-  async scrapeWebsite(url: string) {
-    // TODO: Implement Firecrawl scraping
-    // This will extract content, meta tags, and structure from competitor websites
-    console.log('Scraping website:', url);
-    
-    // Placeholder response
-    return {
-      content: '',
-      metadata: {},
-      structure: {}
-    };
-  }
+interface AnalysisResponse {
+  success: boolean;
+  results?: FirecrawlResult[];
+  error?: string;
 }
 
-// Placeholder for Anthropic Claude API integration
-class AnthropicService {
-  private apiKey: string;
+async function scrapeWithFirecrawl(url: string): Promise<FirecrawlResult> {
+  try {
+    const response = await fetch('https://api.firecrawl.dev/v1/scrape', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${FIRECRAWL_API_KEY}`,
+      },
+      body: JSON.stringify({
+        url,
+        formats: ['markdown', 'html'],
+      }),
+    });
 
-  constructor(apiKey: string) {
-    this.apiKey = apiKey;
-  }
+    if (!response.ok) {
+      return {
+        url,
+        success: false,
+        error: `Firecrawl error: ${response.statusText}`,
+      };
+    }
 
-  async analyzeCompetitors(scrapedData: any[]) {
-    // TODO: Implement Claude API analysis
-    // This will process scraped data and generate insights
-    console.log('Analyzing competitors with Claude API');
-    
-    // Placeholder response
+    const json = await response.json();
+    if (!json.success) {
+      return {
+        url,
+        success: false,
+        error: json.error || 'Unknown error from Firecrawl',
+      };
+    }
+
     return {
-      productFeatures: '',
-      pricingModels: '',
-      uniqueSellingProps: '',
-      contentStrategies: '',
-      seoInsights: '',
-      techStack: '',
-      trustSignals: ''
+      url,
+      success: true,
+      data: {
+        markdown: json.data.markdown,
+        html: json.data.html,
+        metadata: json.data.metadata,
+      },
+    };
+  } catch (error: any) {
+    return {
+      url,
+      success: false,
+      error: error.message || 'Unknown error',
     };
   }
 }
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<AnalysisResponse>
+  req: any,
+  res: any
 ) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
@@ -95,37 +99,19 @@ export default async function handler(
       });
     }
 
-    // TODO: Initialize services with API keys from environment variables
-    // const firecrawl = new FirecrawlService(process.env.FIRECRAWL_API_KEY!);
-    // const anthropic = new AnthropicService(process.env.ANTHROPIC_API_KEY!);
-
-    // TODO: Implement actual analysis pipeline
-    // 1. Scrape each URL using Firecrawl
-    // 2. Extract relevant data (content, metadata, structure)
-    // 3. Process with Claude API for insights
-    // 4. Return structured analysis
-
-    // For now, return placeholder data
-    const analysisData = {
-      productFeatures: 'Placeholder analysis data',
-      pricingModels: 'Placeholder pricing analysis',
-      uniqueSellingProps: 'Placeholder USP analysis',
-      contentStrategies: 'Placeholder content analysis',
-      seoInsights: 'Placeholder SEO analysis',
-      techStack: 'Placeholder tech stack analysis',
-      trustSignals: 'Placeholder trust signals analysis'
-    };
+    // Scrape each URL in parallel
+    const results = await Promise.all(urls.map(scrapeWithFirecrawl));
 
     res.status(200).json({
       success: true,
-      data: analysisData
+      results,
     });
 
   } catch (error) {
     console.error('Analysis error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error'
+      error: 'Internal server error',
     });
   }
 }

@@ -2,7 +2,9 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { API_BASE_URL } from '@/config/api';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import mixpanel from 'mixpanel-browser';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,6 +40,15 @@ const Analyze = () => {
   const [progress, setProgress] = useState(0);
   const [analysisData, setAnalysisData] = useState<AnalysisData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    mixpanel.identify(user?.email);
+    mixpanel.track('Page Viewed', {
+      'page_name': 'Analyze Page',
+      'page_domain': window.location.hostname
+    });
+  }, [user]);
 
   const handleUrlChange = (index: number, value: string) => {
     const newUrls = [...urls];
@@ -49,6 +60,7 @@ const Analyze = () => {
     const validUrls = urls.filter(url => url.trim() !== '');
     if (validUrls.length === 0) return;
 
+    mixpanel.track('Analyze', { urls: validUrls });
     setIsAnalyzing(true);
     setProgress(0);
     setError(null);

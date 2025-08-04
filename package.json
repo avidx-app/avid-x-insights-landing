@@ -55,6 +55,7 @@
     "input-otp": "^1.2.4",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.462.0",
+    "mixpanel-browser": "^2.67.0",
     "next-themes": "^0.3.0",
     "node-fetch": "^3.3.2",
     "react": "^18.3.1",

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
+import mixpanel from 'mixpanel-browser';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, BarChart3 } from "lucide-react";
@@ -6,7 +7,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 const SignIn = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const googleButtonRef = useRef<HTMLDivElement>(null);
@@ -21,43 +22,16 @@ const SignIn = () => {
   }, [isAuthenticated, navigate, from]);
 
   useEffect(() => {
-    // Initialize Google Sign-In button
-    const initializeGoogleButton = () => {
-      if (window.google && googleButtonRef.current && import.meta.env.VITE_GOOGLE_CLIENT_ID) {
-        try {
-          // Clear any existing content
-          googleButtonRef.current.innerHTML = '';
-          
-          window.google.accounts.id.renderButton(
-            googleButtonRef.current,
-            {
-              theme: 'outline',
-              size: 'large',
-              text: 'continue_with',
-              shape: 'rectangular',
-              width: '100%',
-            }
-          );
-        } catch (error) {
-          console.error('Error rendering Google button:', error);
-        }
-      }
-    };
+    mixpanel.identify(user?.email);
+    mixpanel.track('Page Viewed', {
+      'page_name': 'Sign In Page',
+      'page_domain': window.location.hostname
+    });
+  }, [user]);
 
-    if (window.google) {
-      initializeGoogleButton();
-    } else {
-      // Wait for Google script to load
-      const checkGoogle = setInterval(() => {
-        if (window.google) {
-          initializeGoogleButton();
-          clearInterval(checkGoogle);
-        }
-      }, 100);
-
-      return () => clearInterval(checkGoogle);
-    }
-  }, []);
+  const handleSignIn = () => {
+    mixpanel.track('Sign In');
+  }
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
@@ -78,7 +52,7 @@ const SignIn = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div ref={googleButtonRef} className="w-full flex justify-center" />
+            <div ref={googleButtonRef} className="w-full flex justify-center" onClick={handleSignIn} />
 
             <div className="text-center text-sm text-muted-foreground">
               By signing in, you agree to our{" "}

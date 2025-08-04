@@ -1,4 +1,6 @@
 
+import { useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Search, BarChart3, Users, Target, Zap, Eye, TrendingUp, LogIn, LogOut, User } from "lucide-react";
@@ -10,6 +12,14 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 const Index = () => {
   const { user, isAuthenticated, signIn, signOut } = useAuth();
+  useEffect(() => {
+    mixpanel.identify(user?.email);
+    mixpanel.track('Page Viewed', {
+      'page_name': 'Landing Page',
+      'page_domain': window.location.hostname
+    });
+  }, [user]);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}

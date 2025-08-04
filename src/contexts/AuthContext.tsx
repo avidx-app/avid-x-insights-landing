@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import mixpanel from 'mixpanel-browser';
 import { GoogleCredentialResponse, GoogleJWTPayload } from '../types/auth';
 
 interface User {
@@ -114,6 +115,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signOut = () => {
+    mixpanel.track('Sign Out');
     setUser(null);
     localStorage.removeItem('auth_token');
     if (window.google) {

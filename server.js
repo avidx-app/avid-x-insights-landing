@@ -2,11 +2,23 @@ import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import fetch from 'node-fetch';
+import cors from 'cors';
 
 const app = express();
 const port = 8081;
 
 app.use(bodyParser.json());
+
+// Add CORS configuration
+const allowedOrigins = [
+  'http://localhost:8080', // Development
+  'https://avid-x-insights-landing-frontend.onrender.com' // Production
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 const FIRECRAWL_API_KEY = process.env.FIRECRAWL_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
